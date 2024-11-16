@@ -14,8 +14,16 @@ const userSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true,
-    }
-}, { timestamps: true });      // for {createdAt}, {updatedAt}
+    },
+    avatar: {
+        type: String,
+        default: "https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
+    },
+
+},
+
+    { timestamps: true }
+);      // for {createdAt}, {updatedAt}
 
 const User = mongoose.model('User', userSchema)
 
