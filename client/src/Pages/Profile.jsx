@@ -106,6 +106,8 @@ export default function Profile() {
     }
   };
 
+
+
   const handleDeleteUser = async () => {
     try {
       dispatch(deleteUserStart());
@@ -122,6 +124,21 @@ export default function Profile() {
       dispatch(deleteUserFailure(error.message));
     }
   };
+
+  const handleSignOut = async () => {
+    try {
+      dispatch(signOutUserStart())
+      const res = await fetch('/api/auth/signout');
+      const data = await res.json();
+      if (data.success === false) {
+        dispatch(deleteUserFailure(data.message));
+        return;
+      }
+      dispatch(deleteUserSuccess(data));
+    } catch (error) {
+      dispatch(deleteUserFailure(data.message));
+    }
+  }
 
   return (
     <div className='p-3 max-w-lg mx-auto'>
@@ -141,7 +158,7 @@ export default function Profile() {
 
         {/* Profile Image */}
         <img
-          onClick={() => fileRef.current.click()} // Trigger file input click on image click
+          onclick={() => fileRef.current.click()} // Trigger file input click on image click
           src={formData.avatar || currentUser.avatar} // Show uploaded or default avatar
           alt='profile'
           className='rounded-full h-24 w-24 object-cover cursor-pointer self-center mt-2'
@@ -206,7 +223,7 @@ export default function Profile() {
           Delete account
         </span>
 
-        <span className='text-red-700 cursor-pointer'>Sign out</span>
+        <span onClick={handleSignOut} className='text-red-700 cursor-pointer'>Sign out</span>
       </div>
 
       <p className='text-red-700 mt-5'>{error ? error : ''}</p>
