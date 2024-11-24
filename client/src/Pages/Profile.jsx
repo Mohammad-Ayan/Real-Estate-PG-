@@ -17,6 +17,7 @@ import {
   deleteUserSuccess,
 } from '../redux/user/userSlice';
 import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 export default function Profile() {
   // Reference to the file input element
@@ -158,11 +159,12 @@ export default function Profile() {
 
         {/* Profile Image */}
         <img
-          onclick={() => fileRef.current.click()} // Trigger file input click on image click
-          src={formData.avatar || currentUser.avatar} // Show uploaded or default avatar
-          alt='profile'
-          className='rounded-full h-24 w-24 object-cover cursor-pointer self-center mt-2'
+          onClick={() => fileRef.current.click()}
+          src={formData.avatar || currentUser.avatar}
+          alt="profile"
+          className="rounded-full h-24 w-24 object-cover cursor-pointer self-center mt-2"
         />
+
 
         {/* File Upload Status */}
         <p className='text-sm self-center'>
@@ -211,6 +213,13 @@ export default function Profile() {
         >
           {loading ? 'Loading...' : 'Update'}
         </button>
+        <Link
+          className="bg-green-700 text-white p-3 rounded-lg uppercase text-center hover:opacity-95"
+          to="/create-listing"
+        >
+          Create Listing
+        </Link>
+
       </form>
 
       {/* Actions Section */}
