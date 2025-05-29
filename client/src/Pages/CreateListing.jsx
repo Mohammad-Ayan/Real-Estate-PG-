@@ -1,6 +1,8 @@
-import React from 'react';
+import { useState } from "react";
+console.log(files)
 
 export default function CreateListing() {
+    const [images, setImages] = useStatete([])
     return (
         <main className="p-6 max-w-5xl mx-auto bg-gray-50 rounded-lg shadow-lg">
             <h1 className="text-4xl font-bold text-center my-7 text-gray-800">
@@ -92,8 +94,8 @@ export default function CreateListing() {
                         </span>
                     </p>
                     <div className="flex gap-4 items-center">
-                        <input
-                            className="p-3 border rounded-lg w-full bg-gray-100 text-gray-800 placeholder-gray-500 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                        <input onChange={(e)=>setFiles(e.target.files)}
+                        className="p-3 border rounded-lg w-full bg-gray-100 text-gray-800 placeholder-gray-500 focus:ring-2 focus:ring-blue-500 focus:outline-none"
                             type="file"
                             id="images"
                             accept="image/*"
